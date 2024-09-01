@@ -1,4 +1,4 @@
-package cortes;
+package school;
 
 public class Salaries {
     int eid,hours;

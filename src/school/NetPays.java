@@ -1,4 +1,4 @@
-package cortes;
+package school;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

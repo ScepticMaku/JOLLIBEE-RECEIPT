@@ -1,4 +1,4 @@
-package cortes;
+package school;
 import java.util.Scanner;
 
 public class Salary {

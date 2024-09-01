@@ -1,0 +1,236 @@
+package console;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class JOLLIBEE_RECEIPT {
+    Scanner sc = new Scanner(System.in);
+    LocalDateTime date = LocalDateTime.now();
+    DateTimeFormatter fdate = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+    
+    int TYPE, i = 0;
+    int TOTAL_QUANTITY = 0;
+    int[][] QUANTITY = new int[100][100];
+    String[] LIST = new String[100];
+    String CHOICE,MEAL;
+    String NAME, MENU_SELECT;
+    String formDate = date.format(fdate);
+    double CASH;
+    int[] QTY = new int[100];
+    
+    public void addInfo(){
+        System.out.println("Jollibee Receipt\n");
+        
+        System.out.print("Enter cashier name: ");
+        NAME = sc.nextLine();
+        
+        viewMenu();
+        System.out.println("(Selection Example: B1");
+        
+        do{
+            System.out.print("Enter selection: ");
+            MENU_SELECT = sc.next();
+            
+            verifyMenu(MENU_SELECT, i);
+            
+            System.out.print("Add another?[y/n]: ");
+            
+            CHOICE = sc.next();
+            
+            if(CHOICE.contains("y")){
+                CHOICE="y";
+                i++;
+                sc.reset();
+            } else{
+                break;
+            }
+        } while(CHOICE.contains("y"));
+        
+        System.out.println("Choose: ");
+        System.out.println("1. Dine in");
+        System.out.println("2. Take out");
+        System.out.print("Enter choice: ");
+        TYPE = sc.nextInt();
+        
+        switch(TYPE){
+            case 1:
+                MEAL = "DINE IN";
+                break;
+            case 2:
+                MEAL = "TAKE OUT";
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
+        
+        
+        System.out.println("Total price: "+TOTAL_QUANTITY);
+        System.out.print("Enter cash: ");
+        CASH = sc.nextDouble();
+        
+        System.out.println("\nSales Invoice");
+        System.out.println("Cashier: "+NAME);
+        System.out.println("=============================================");
+        System.out.println(""+formDate);
+        System.out.println("=============================================");
+        System.out.println(""+MEAL+"--------------------------------------\n");
+        
+        for(int x = 0; x <= i; x++){
+            System.out.printf("%d %s\n", QTY[i], LIST[i]);
+        }
+        
+        System.out.println("\n"+(i+1)+" ITEMS --------------------------- TOTAL "+TOTAL_QUANTITY);
+        System.out.println("CASH ------------------------------ "+CASH);
+        System.out.println("CHANGE ---------------------------- "+(CASH-TOTAL_QUANTITY));
+    }
+    
+    public void verifyMenu(String menu, int e){
+        if(menu.contains("A1")){
+                System.out.println("\nSelected: 1pc Chickenjoy with Rice");
+                System.out.print("Enter quantity: ");
+                QUANTITY[0][0] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[0][0]*82;
+                LIST[e] = "1PC CHCKNJY w/ RICE";
+                QTY[e] = 82;
+            } else if(menu.contains("A2")){
+                System.out.println("\nSelected: 2pc Chickenjoy with Rice");
+                System.out.print("Enter quantity: ");
+                QUANTITY[0][1] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[0][1]*163;
+                LIST[e] = "2PC CHCKNJY w/ RICE";
+                QTY[e] = 163;
+            } else if(menu.contains("A3")){
+                System.out.println("\nSelected: 6pc Chickenjoy Bucket Solo + 1pc");
+                System.out.print("Enter quantity: ");
+                QUANTITY[0][2] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[0][2]*435;
+                QTY[e] = 435;
+                LIST[e] = "6+1PC CHCKNJY BCKT SOLO";
+            } else if(menu.contains("B1")){
+                System.out.println("\nSelected: Yum Burger");
+                System.out.print("Enter quantity: ");
+                QUANTITY[1][0] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[1][0]*40;
+                LIST[e] = "YUM BRGR";
+                QTY[e] = 40;
+            } else if(menu.contains("B2")){
+                System.out.println("\nSelected: Cheesy Yum Burger");
+                System.out.print("Enter quantity: ");
+                QUANTITY[1][1] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[1][1]*66;
+                LIST[e] = "CHSY YUM BRGR";
+                QTY[e] = 66;
+            } else if(menu.contains("B3")){
+                System.out.println("\nSelected: Champ Burger");
+                System.out.print("Enter quantity: ");
+                QUANTITY[1][2] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[1][2]*169;
+                LIST[e] = "CHMP BRGR";
+                QTY[e] = 169;
+            } else if(menu.contains("C1")){
+                System.out.println("\nSelected: Jolly Spaghetti");
+                System.out.print("Enter quantity: ");
+                QUANTITY[2][0] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[2][0]*59;
+                LIST[e] = "JLLY SPGHTTI";
+                QTY[e] = 59;
+            } else if(menu.contains("C2")){
+                System.out.println("\nSelected: Jolly Spaghetti with Yumburger");
+                System.out.print("Enter quantity: ");
+                QUANTITY[2][1] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[2][1]*127;
+                LIST[e] = "JLLY SPGHTII w/ YUM BRGR";
+                QTY[e] = 127;
+            } else if(menu.contains("C3")){
+                System.out.println("\nSeleced: Jolly Spaghetti with Fries & Drink");
+                System.out.print("Enter quantity: ");
+                QUANTITY[2][2] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[2][2]*122;
+                LIST[e] = "JLLY SPGHTII w/ FRIES&DRNK";
+                QTY[e] = 122;
+            } else if(menu.contains("D1")){
+                System.out.println("\nSelected: Jolly Crispy Fries");
+                System.out.print("Enter quantity: ");
+                QUANTITY[3][0] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[3][0]*48;
+                LIST[e] = "JLLY CRSPY FRIES";
+                QTY[e] = 48;
+            } else if(menu.contains("D2")){
+                System.out.println("\nSelected: Mashed Potatoes");
+                System.out.print("Enter quantity: ");
+                QUANTITY[3][1] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[3][1]*55;
+                LIST[e] = "MSHD POTATOES";
+                QTY[e] = 55;
+            } else if(menu.contains("D3")){
+                System.out.println("\nSelected: Mango Fudge Sundae");
+                System.out.print("Enter quantity: ");
+                QUANTITY[3][2] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[3][2]*63;
+                LIST[e] = "MNGO FDGE SNDAE";
+                QTY[e] = 63;
+            } else if(menu.contains("E1")){
+                System.out.println("\nSelected: Coke");
+                System.out.print("Enter quantity: ");
+                QUANTITY[4][0] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[4][0]*53;
+                LIST[e] = "COKE";
+                QTY[e] = 53;
+            } else if(menu.contains("E2")){
+                System.out.println("\nSelected: Sprite");
+                System.out.print("Enter quantity: ");
+                QUANTITY[4][1] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[4][1]*53;
+                LIST[e] = "SPRTE";
+                QTY[e] = 53;
+            } else if(menu.contains("E3")){
+                System.out.println("\nSelected: Pineapple Juice");
+                System.out.print("Enter quantity: ");
+                QUANTITY[4][2] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[4][2]*64;
+                LIST[e] = "PNAPPLE JC";
+                QTY[e] = 64;
+            } else if(menu.contains("F1")){
+                System.out.println("\nSelected: Peach Mango Pie");
+                System.out.print("Enter quantity: ");
+                QUANTITY[5][0] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[5][0]*48;
+                LIST[e] = "PCH MNGO PIE";
+                QTY[e] = 48;
+            } else if(menu.contains("F2")){
+                System.out.println("\nSelected: Large Mango Pie");
+                System.out.print("Enter quantity: ");
+                QUANTITY[5][1] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[5][1]*63;
+                LIST[e] = "LRGE MNGO PIE";
+                QTY[e] = 63;
+            } else if(menu.contains("F3")){
+                System.out.println("\nSelected: Chocolate Sundae Twirl");
+                System.out.print("Enter quantity: ");
+                QUANTITY[5][2] = sc.nextInt();
+                TOTAL_QUANTITY += QUANTITY[5][1]*48;
+                LIST[e] = "CHCLT SNDAE TWRL";
+                QTY[e] = 48;
+            } else{
+                System.out.println("Selection invalid.");
+                System.exit(0);
+            }
+    }
+    
+    public void viewMenu(){
+        System.out.println("\nMenu:");
+        System.out.println("+---+----------------------------------+-------+---+-------------------+-------+---+------------------------------------+-------+");
+        System.out.println("| A | Chickenjoy                       | Price | B | Burgers           | Price | C | Spaghetti                          | Price |");
+        System.out.println("+---+----------------------------------+-------+---+-------------------+-------+---+------------------------------------+-------+");
+        System.out.println("| 1 | 1pc Chickenjoy with Rice         | P82   | 1 | Yum Burger        | P40   | 1 | Jolly Spaghetti                    | P59   |");
+        System.out.println("| 2 | 2pc Chickenjoy with Rice         | P163  | 2 | Cheesy Yum Burger | P66   | 2 | Jolly Spaghetti with Yumburger     | P127  |");
+        System.out.println("| 3 | 6pc Chickenjoy Bucket Solo + 1pc | P435  | 3 | Champ Burger      | P169  | 3 | Jolly Spaghetti with Fries & Drink | P122  |");
+        System.out.println("+---+----------------------------------+-------+---+-------------------+-------+---+------------------------------------+-------+");
+        System.out.println("| D | Sides                            | Price | E | Beverages         | Price | F | Deserts                            | Price |");
+        System.out.println("+---+----------------------------------+-------+---+-------------------+-------+---+------------------------------------+-------+");
+        System.out.println("| 1 | Jolly Crispy Fries               | P48   | 1 | Coke              | P53   | 1 | Peach Mango Pie                    | P48   |");
+        System.out.println("| 2 | Mashed Potatoes                  | P55   | 2 | Sprite            | P53   | 2 | Large Mango Pie                    | P63   |");
+        System.out.println("| 3 | Mango Fudge Sundae               | P63   | 3 | Pineapple Juice   | P64   | 3 | Chocolate Sundae Twirl             | P48   |");
+        System.out.println("+---+----------------------------------+-------+---+-------------------+-------+---+------------------------------------+-------+\n");
+    }
+}
